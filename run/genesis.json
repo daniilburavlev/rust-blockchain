@@ -1,0 +1,22 @@
+[
+  {
+    "hash": "GENESIS_519c2c360cbd4f0a8b6842fa9556b9e0",
+    "from": "GENESIS",
+    "to": "034e363531822d1eac09910d7e6fb7fff4b6df9278c297b516c9f91e9faecbb5bb",
+    "amount": "2653090",
+    "nonce": 1,
+    "timestamp": 1009227600,
+    "signature": "GENESIS",
+    "block": 0
+  },
+  {
+    "hash": "GENESIS_519c2c360cbd4f0a8b6842fa9556b9e0",
+    "from": "034e363531822d1eac09910d7e6fb7fff4b6df9278c297b516c9f91e9faecbb5bb",
+    "to": "STAKE",
+    "amount": "1323090",
+    "nonce": 1,
+    "timestamp": 1009227600,
+    "signature": "GENESIS",
+    "block": 0
+  }
+]

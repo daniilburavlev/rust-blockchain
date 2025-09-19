@@ -1,0 +1,6 @@
+/.idea
+/target
+/.test_keystore
+/.test_storage
+/.keystore
+/.storage*

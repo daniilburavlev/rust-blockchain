@@ -1,0 +1,9 @@
+{
+  "validator": "034e363531822d1eac09910d7e6fb7fff4b6df9278c297b516c9f91e9faecbb5bb",
+  "port": 8089,
+  "keystore_path": ".keystore",
+  "storage_path": ".storage",
+  "genesis_path": "run/genesis.json",
+  "nodes" : [
+  ]
+}
