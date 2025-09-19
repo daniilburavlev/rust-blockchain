@@ -6,7 +6,8 @@ use std::fs;
 
 #[test]
 fn test_blockchain() {
-    let config = config();
+    let temp_file = tempfile::tempdir().unwrap();
+    let config = config(temp_file.path());
     let wallet = wallet_with_balance(&config).unwrap();
     let blockchain = Blockchain::new(wallet.clone(), &config).unwrap();
 

@@ -14,13 +14,31 @@ pub struct Config {
 }
 
 impl Config {
+    pub fn new(
+        keystore_path: String,
+        validator: String,
+        port: i64,
+        storage_path: String,
+        genesis_path: String,
+        nodes: Vec<String>,
+    ) -> Self {
+        Self {
+            keystore_path,
+            validator,
+            port,
+            storage_path,
+            genesis_path,
+            nodes,
+        }
+    }
+
     pub fn from_file(path: &str) -> Result<Self, std::io::Error> {
         let json = fs::read_to_string(path)?;
         let config: Config = serde_json::from_str(&json)
             .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e.to_string()))?;
         Ok(config)
     }
-    
+
     pub fn port(&self) -> i64 {
         self.port
     }

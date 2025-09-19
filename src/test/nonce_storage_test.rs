@@ -6,7 +6,8 @@ use crate::test::commons::config;
 
 #[test]
 fn test_nonce_save_get() -> Result<(), std::io::Error> {
-    let config = config();
+    let temp_dir = tempfile::tempdir()?;
+    let config = config(temp_dir.path());
     let db = db::open(&config)?;
     let nonce_storage = NonceStorage::new(Arc::clone(&db));;
     let value = 90;

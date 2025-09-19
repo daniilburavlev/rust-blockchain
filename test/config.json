@@ -1,9 +1,0 @@
-{
-  "validator": "023eda78bd59eda90cc145bcdd4025882c655a251e6cdac6473a08576a619060bd",
-  "port": 8089,
-  "keystore_path": ".test_keystore",
-  "storage_path": ".test_storage",
-  "genesis_path": "test/genesis.json",
-  "nodes" : [
-  ]
-}

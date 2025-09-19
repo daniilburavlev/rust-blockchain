@@ -1,5 +1,6 @@
 use std::fs;
 use std::sync::Arc;
+use tempfile::tempdir;
 use crate::chain::block::Block;
 use crate::chain::storage::block_storage::BlockStorage;
 use crate::chain::storage::db;
@@ -9,12 +10,13 @@ use crate::test::commons::config;
 
 #[test]
 fn test_block_save() {
+    let temp_dir = tempdir().unwrap();
     let wallet = Wallet::new();
     let tx = Tx::new(&wallet, wallet.address(), String::from("0.001"), 1).unwrap();
     let txs = vec![tx];
     let block = Block::genesis(txs);
 
-    let config = config();
+    let config = config(temp_dir.path());
     let db = db::open(&config).unwrap();
     let block_storage = BlockStorage::new(Arc::clone(&db));
     block_storage.save(&block).unwrap();

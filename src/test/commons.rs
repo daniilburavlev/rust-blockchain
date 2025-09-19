@@ -3,11 +3,26 @@ use crate::chain::wallet::Wallet;
 use std::fs;
 use std::fs::OpenOptions;
 use std::io::Write;
+use std::path::Path;
 
 pub const WALLET_PASSWORD: &[u8] = b"password";
 
-pub fn config() -> Config {
-    Config::from_file("test/config.json").unwrap()
+const KEYSTORE_PATH: &str = "/.keystore";
+const VALIDATOR: &str = "/.keystore";
+const STORAGE_PATH: &str = "/.storage";
+const GENESIS_PATH: &str = "/genesis.json";
+const PORT: i64 = 8080;
+
+pub fn config(path: &Path) -> Config {
+    let path = path.to_str().unwrap().to_string();
+    Config::new(
+        path.clone() + KEYSTORE_PATH,
+        path.clone() + VALIDATOR,
+        PORT,
+        path.clone() + STORAGE_PATH,
+        path.clone() + GENESIS_PATH,
+        vec![]
+    )
 }
 
 pub fn wallet(config: &Config) -> Wallet {

@@ -7,7 +7,8 @@ use crate::test::commons::{config, wallet, wallet_with_balance};
 
 #[test]
 fn test_tx_storage_save_find_by_hash() -> Result<(), std::io::Error> {
-    let config = config();
+    let temp_dir = tempfile::tempdir()?;
+    let config = config(temp_dir.path());
     let db = db::open(&config).unwrap();
     let tx_storage = TxStorage::new(Arc::clone(&db));
     let from = wallet(&config);
@@ -52,7 +53,8 @@ fn test_tx_storage_save_find_by_hash() -> Result<(), std::io::Error> {
 
 #[test]
 fn update_pending() {
-    let config = config();
+    let temp_dir = tempfile::tempdir().unwrap();
+    let config = config(temp_dir.path());
     let wallet = wallet_with_balance(&config).unwrap();
     let db = db::open(&config).unwrap();
     let tx = Tx::new(&wallet, wallet.address(), String::from("10"), 1).unwrap();
