@@ -2,7 +2,10 @@
 - [Concepts and purpose](#concepts-and-purpose)
   - [Blockchain wallet](#blockchain-wallet)
 - [Design & Implementation](#design-and-implementation)
-
+  - [Secp256k1 key pair](#secp256k1-key-pair)
+  - [Wallet implementation](#wallet-implementation)
+  - [Persisting wallet](#persisting-wallet)
+- [Testing & Usage](#testing-and-usage)
 ---
 ## Concepts and purpose
 
@@ -35,6 +38,8 @@ The private key is a large randomly generated secret number that is used to deri
 
 #### *Public key*
 The public key is a pair of large numbers derived from the private key. The public key is used to identify the account on the blockchain and verify transactions signed with the account private key. The public key can be safely shared with any participant on the blockchain
+
+### Wallet implementation
 
 Firstly we create new cargo binary crate
 
