@@ -1,10 +1,10 @@
-use std::cmp::Ordering;
-use crate::chain::wallet;
 use bigdecimal::BigDecimal;
 use serde::{Deserialize, Serialize};
 use sha2::Digest;
+use std::cmp::Ordering;
 use std::str::FromStr;
 use std::time::{SystemTime, UNIX_EPOCH};
+use wallet::wallet::Wallet;
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Tx {
@@ -36,7 +36,7 @@ impl PartialOrd for Tx {
 
 impl Tx {
     pub fn new(
-        wallet: &wallet::Wallet,
+        wallet: &Wallet,
         to: String,
         amount: String,
         nonce: u64,

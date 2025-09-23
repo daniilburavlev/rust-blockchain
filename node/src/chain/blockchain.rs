@@ -7,7 +7,6 @@ use crate::chain::storage::nonce_storage::NonceStorage;
 use crate::chain::storage::tx_storage::TxStorage;
 use crate::chain::system::{STAKE_WALLET, UNSTAKE_WALLET};
 use crate::chain::tx::Tx;
-use crate::chain::wallet::Wallet;
 use bigdecimal::num_bigint::{BigInt, ToBigInt};
 use bigdecimal::{BigDecimal, FromPrimitive, Zero};
 use std::collections::HashMap;
@@ -15,6 +14,7 @@ use std::fs;
 use std::hash::{DefaultHasher, Hash, Hasher};
 use std::sync::Arc;
 use sha2::Digest;
+use wallet::wallet::Wallet;
 
 pub struct Blockchain {
     wallet: Wallet,

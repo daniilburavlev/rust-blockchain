@@ -1,7 +1,7 @@
-use crate::chain::tx::Tx;
-use crate::chain::wallet;
 use serde::{Deserialize, Serialize};
 use sha2::Digest;
+use wallet::wallet::Wallet;
+use crate::chain::tx::Tx;
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Block {
@@ -16,7 +16,7 @@ pub struct Block {
 
 impl Block {
     pub fn new(
-        wallet: &wallet::Wallet,
+        wallet: &Wallet,
         idx: u64,
         parent_hash: String,
         txs: Vec<Tx>,

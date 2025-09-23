@@ -1,6 +1,6 @@
+use wallet::wallet::Wallet;
 use crate::chain::block::Block;
 use crate::chain::tx::Tx;
-use crate::chain::wallet::Wallet;
 
 #[test]
 fn test_genesis_block_creation() -> Result<(), std::io::Error> {

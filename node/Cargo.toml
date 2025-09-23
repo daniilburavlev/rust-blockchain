@@ -1,0 +1,27 @@
+[package]
+name = "node"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+wallet = { path = "../wallet" }
+rand = { workspace = true }
+aes-gcm = { workspace = true }
+libsecp256k1 = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+hex = { workspace = true }
+sha2 = { workspace = true }
+rs_merkle = { workspace = true }
+bigdecimal = { workspace = true }
+rocksdb = { workspace = true }
+clap = { workspace = true }
+libp2p = { workspace = true }
+rpassword = { workspace = true }
+tokio = { workspace = true }
+futures = { workspace = true }
+tracing-subscriber = { workspace = true }
+tokio-cron-scheduler = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

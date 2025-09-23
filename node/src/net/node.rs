@@ -2,7 +2,6 @@ use crate::chain::block::Block;
 use crate::chain::blockchain::Blockchain;
 use crate::chain::config::Config;
 use crate::chain::tx::Tx;
-use crate::chain::wallet::Wallet;
 use crate::net::behaviour::{
     BlockRequest, BlockResponse, NodeBehaviour, NodeBehaviourEvent, NonceRequest, NonceResponse,
     TxResponse,
@@ -19,6 +18,7 @@ use std::time::Duration;
 use tokio::select;
 use tokio::sync::mpsc;
 use tokio_cron_scheduler::{Job, JobScheduler};
+use wallet::wallet::Wallet;
 use crate::net::client::Client;
 
 pub struct Node {

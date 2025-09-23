@@ -1,9 +1,9 @@
 use crate::chain::config::Config;
-use crate::chain::wallet::Wallet;
 use std::fs;
 use std::fs::OpenOptions;
 use std::io::Write;
 use std::path::Path;
+use wallet::wallet::Wallet;
 
 pub const WALLET_PASSWORD: &[u8] = b"password";
 

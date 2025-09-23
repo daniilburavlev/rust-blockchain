@@ -11,7 +11,7 @@ git clone https://github.com/daniilburavlev/rust-blockchain.git && \
 ## Creating wallets
 You can generate local wallets using command below
 ```bash
-./target/release/blockchain create
+./target/release/node create
 ```
 
 ### Genesis block
@@ -52,7 +52,7 @@ Genesis block data stored in `run/genesis.json` file, you can edit it to include
 ## Run local node
 
 ```bash
-./target/release/blockchain start
+./target/release/node start
 ```
 after launching in the console you can see the address where the service is available
 
@@ -80,7 +80,7 @@ After running nodes will be synced and ready to communicate
 
 ## Create new transaction
 ```bash
-./target/release/blockchain tx --from wallet_from \
+./target/release/node tx --from wallet_from \
   --to wallet-to --amount 10
 ```
 

@@ -11,5 +11,3 @@ mod nonce_storage_test;
 mod tx_storage_test;
 #[cfg(test)]
 mod tx_test;
-#[cfg(test)]
-mod wallet_test;

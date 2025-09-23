@@ -1,7 +1,7 @@
-use crate::chain::crypto;
 use std::fs;
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
+use crate::crypto;
 
 #[derive(Clone, Debug)]
 pub struct Wallet {

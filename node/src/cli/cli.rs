@@ -3,6 +3,7 @@ use crate::chain::tx;
 use crate::net::client::Client;
 use crate::{chain, net};
 use clap::{Parser, Subcommand};
+use wallet::wallet::Wallet;
 
 #[derive(Parser)]
 #[command(version, about, long_about = "xhcg-blockchain node/client")]
@@ -40,7 +41,7 @@ pub enum ChainCmd {
 async fn create_wallet(config: &chain::config::Config) -> Result<(), std::io::Error> {
     println!("Enter password:");
     let password = rpassword::read_password()?;
-    let wallet = chain::wallet::Wallet::new();
+    let wallet = Wallet::new();
     wallet.write(&config.keystore_path(), password.as_bytes())?;
     println!("Wallet created, address: {}", wallet.address());
     Ok(())
@@ -62,8 +63,7 @@ async fn new_tx(
 ) -> Result<(), Box<dyn std::error::Error>> {
     println!("Enter password:");
     let password = rpassword::read_password()?;
-    let wallet =
-        chain::wallet::Wallet::read(&config.keystore_path(), from.as_str(), password.as_bytes())?;
+    let wallet = Wallet::read(&config.keystore_path(), from.as_str(), password.as_bytes())?;
     let mut client = Client::new(config).await?;
     let nonce = client.get_nonce(from).await;
     let tx = tx::Tx::new(&wallet, to, amount, nonce + 1)?;

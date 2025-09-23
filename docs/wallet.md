@@ -41,31 +41,49 @@ The public key is a pair of large numbers derived from the private key. The publ
 
 ### Wallet implementation
 
-Firstly we create new cargo binary crate
+Firstly we create new cargo binary crate in workspace
 
 ```bash
-cargo new blockchain
+cd blockchain && cargo new wallet
 ```
+
+Edit workspace's `Cargo.toml`
+```toml
+[workspace]
+resolver = "2"
+# adding wallet as new memeber
+members = ["wallet"]
+...
+```
+Now we will work with wallet lib `cd wallet`
 
 Adding new mod `src/chain/mod.rs`
 ```rust
 pub mod wallet;
 ```
 
-Main function: 
+`lib.rs` file
 ```rust
-mod chain;
-
-fn main() {
-}
+pub mod wallet;
+mod crypto;
+#[cfg(test)]
+mod wallet_test;
 ```
-Adding required dependencies for wallet in `Cargo.toml`
+Adding required dependencies for wallet in main `Cargo.toml`
 ```toml
-["dependencies"]
+["workspace.dependencies"]
 argon2 = "0.5.3"
 libsecp256k1 = "0.7.2"
 rand = "0.8"
 ```
+Wallet's `Cargo.toml`
+```toml
+["dependencies"]
+argon2 = { workspace = true }
+libsecp256k1 = { workspace = true }
+rand = { workspace = true }
+```
+
 Define wallet structure in `src/chain/wallet.rs`
 ```rust
 #[derive(Clone, Debug)]
@@ -122,6 +140,51 @@ Only the owner of the account can re-create the account and use the account to s
 #### Implementation
 
 ```rust
+// wallet/src/crypto.rs
+
+pub fn derive_key(password: &[u8]) -> Result<([u8; 16], [u8; 32]), std::io::Error> {
+  // Generating password random salt
+  let salt = argon2::password_hash::SaltString::generate(&mut rand::rngs::OsRng);
+  // Getting argon instance
+  let argon2 = argon2::Argon2::default();
+  // Hashing password
+  let password_hash = argon2
+          .hash_password(password, &salt)
+          .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e.to_string()))?
+          .hash
+          .unwrap();
+  if password_hash.as_bytes().len() != 32 {
+    return Err(std::io::Error::new(
+      std::io::ErrorKind::InvalidInput,
+      "Invalid password hash",
+    ));
+  }
+  let mut key_bytes = [0u8; 32];
+  // Generating key from hashed password
+  key_bytes.copy_from_slice(&password_hash.as_bytes());
+  let mut salt_bytes = [0u8; 16];
+  salt.decode_b64(&mut salt_bytes).unwrap();
+  Ok((salt_bytes, key_bytes))
+}
+```
+
+Encrypt function 
+```rust
+// wallet/src/crypto.rs
+pub fn encrypt_data(key: &[u8], data: &[u8]) -> Result<(Vec<u8>, [u8; 12]), std::io::Error> {
+    let cipher = aes_gcm::Aes256Gcm::new(key.into());
+    let mut nonce_bytes = [0u8; 12];
+    rand::rngs::OsRng.fill_bytes(&mut nonce_bytes);
+    let nonce = aes_gcm::Nonce::from_slice(&nonce_bytes);
+    let cipher_data = cipher
+        .encrypt(nonce, data)
+        .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e.to_string()))?;
+    Ok((cipher_data, nonce_bytes))
+}
+```
+
+```rust
+// wallet/src/wallet.rs
 impl Wallet {
   ...
   pub fn write(&self, dir: &str, password: &[u8]) -> Result<(), std::io::Error> {
@@ -151,6 +214,45 @@ impl Wallet {
 - Recreate wallet with secret
 
 #### Implementation
+Restoring key
+
+```rust
+// wallet/src/crypto.rs
+pub fn restore_key(salt: &[u8], password: &[u8]) -> Result<[u8; 32], std::io::Error> {
+  let argon2 = argon2::Argon2::default();
+  let salt = argon2::password_hash::SaltString::encode_b64(salt)
+          .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidInput, e.to_string()))?;
+  let password_hash = argon2.hash_password(password, &salt).unwrap().hash.unwrap();
+  if password_hash.as_bytes().len() != 32 {
+    return Err(std::io::Error::new(
+      std::io::ErrorKind::InvalidData,
+      "Invalid password hash",
+    ));
+  }
+  let mut key_bytes = [0u8; 32];
+  key_bytes.copy_from_slice(password_hash.as_bytes());
+  Ok(key_bytes)
+}
+```
+
+Decrypt function
+```rust
+// wallet/src/crypto.rs
+pub fn decrypt_data(
+    key: &[u8],
+    data: &[u8],
+    nonce_bytes: &[u8],
+) -> Result<Vec<u8>, std::io::Error> {
+    let cipher = aes_gcm::Aes256Gcm::new(key.into());
+    let nonce = aes_gcm::Nonce::from_slice(nonce_bytes);
+    let text = cipher
+        .decrypt(nonce, data)
+        .map_err(|e| std::io::Error::new(std::io::ErrorKind::InvalidData, e.to_string()))?;
+    Ok(text)
+}
+```
+
+Reading wallet data from file
 
 ```rust
 impl Wallet {
