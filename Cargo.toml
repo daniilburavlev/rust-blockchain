@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["client", "node", "wallet"]
+members = ["chain", "client", "node", "wallet"]
 
 [workspace.package]
 version = "0.0.1"

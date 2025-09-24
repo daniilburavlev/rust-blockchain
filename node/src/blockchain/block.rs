@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use sha2::Digest;
 use wallet::wallet::Wallet;
-use crate::chain::tx::Tx;
+use chain::tx::Tx;
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Block {

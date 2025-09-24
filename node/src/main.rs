@@ -1,4 +1,4 @@
-mod chain;
+mod blockchain;
 mod cli;
 mod net;
 mod test;

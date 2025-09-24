@@ -1,7 +1,7 @@
 use std::fs;
 use std::sync::Arc;
-use crate::chain::storage::db;
-use crate::chain::storage::nonce_storage::NonceStorage;
+use crate::blockchain::storage::db;
+use crate::blockchain::storage::nonce_storage::NonceStorage;
 use crate::test::commons::config;
 
 #[test]

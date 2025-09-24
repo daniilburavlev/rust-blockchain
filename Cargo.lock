@@ -483,6 +483,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "chain"
+version = "0.0.1"
+dependencies = [
+ "bigdecimal",
+ "hex",
+ "libsecp256k1",
+ "serde",
+ "sha2 0.10.9",
+ "wallet",
+]
+
+[[package]]
 name = "chrono"
 version = "0.4.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2426,14 +2438,12 @@ dependencies = [
 name = "node"
 version = "0.1.0"
 dependencies = [
- "aes-gcm",
  "bigdecimal",
+ "chain",
  "clap",
  "futures",
  "hex",
  "libp2p",
- "libsecp256k1",
- "rand 0.8.5",
  "rocksdb",
  "rpassword",
  "rs_merkle",

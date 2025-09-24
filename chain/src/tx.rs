@@ -21,9 +21,9 @@ pub struct Tx {
 impl Ord for Tx {
     fn cmp(&self, other: &Self) -> Ordering {
         let order = self.timestamp.cmp(&other.timestamp);
-        match order{
+        match order {
             Ordering::Equal => self.hash.cmp(&other.hash),
-            _ => order
+            _ => order,
         }
     }
 }
@@ -65,7 +65,7 @@ impl Tx {
     pub fn from(&self) -> String {
         self.from.to_string()
     }
-    
+
     pub fn nonce(&self) -> u64 {
         self.nonce
     }

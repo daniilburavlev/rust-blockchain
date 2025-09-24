@@ -1,7 +1,7 @@
-use crate::chain::block::Block;
-use crate::chain::blockchain::Blockchain;
-use crate::chain::config::Config;
-use crate::chain::tx::Tx;
+use crate::blockchain::block::Block;
+use crate::blockchain::blockchain::Blockchain;
+use crate::blockchain::config::Config;
+use chain::tx::Tx;
 use crate::net::behaviour::{
     BlockRequest, BlockResponse, NodeBehaviour, NodeBehaviourEvent, NonceRequest, NonceResponse,
     TxResponse,

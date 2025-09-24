@@ -1,8 +1,8 @@
-use crate::chain;
-use crate::chain::block::Block;
 use libp2p::swarm::NetworkBehaviour;
 use libp2p::{gossipsub, mdns, request_response};
 use serde::{Deserialize, Serialize};
+use chain::tx::Tx;
+use crate::blockchain::block::Block;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct NonceRequest {
@@ -32,7 +32,7 @@ pub struct BlockResponse {
 #[derive(NetworkBehaviour)]
 pub struct ClientBehaviour {
     pub nonce: request_response::json::Behaviour<NonceRequest, NonceResponse>,
-    pub tx: request_response::json::Behaviour<chain::tx::Tx, TxResponse>,
+    pub tx: request_response::json::Behaviour<Tx, TxResponse>,
     pub find_block: request_response::json::Behaviour<BlockRequest, BlockResponse>,
 }
 

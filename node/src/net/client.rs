@@ -1,5 +1,4 @@
-use crate::chain;
-use crate::chain::block::Block;
+use crate::blockchain::block::Block;
 use crate::net::behaviour::{
     BlockRequest, BlockResponse, ClientBehaviour, ClientBehaviourEvent, NonceRequest,
     NonceResponse, TxResponse,
@@ -14,7 +13,7 @@ pub struct Client {
 }
 
 impl Client {
-    pub async fn new(config: &chain::config::Config) -> Result<Self, Box<dyn std::error::Error>> {
+    pub async fn new(config: &crate::blockchain::config::Config) -> Result<Self, Box<dyn std::error::Error>> {
         if config.nodes().is_empty() {
             return Err(Box::new(std::io::Error::new(
                 std::io::ErrorKind::NotFound,

@@ -9,5 +9,3 @@ mod commons;
 mod nonce_storage_test;
 #[cfg(test)]
 mod tx_storage_test;
-#[cfg(test)]
-mod tx_test;

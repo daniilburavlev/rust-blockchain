@@ -1,5 +1,5 @@
-use crate::chain::blockchain::Blockchain;
-use crate::chain::tx::Tx;
+use crate::blockchain::blockchain::Blockchain;
+use chain::tx::Tx;
 use crate::test::commons::{config, wallet_with_balance};
 use bigdecimal::BigDecimal;
 use std::fs;

@@ -1,5 +1,5 @@
 use std::sync::Arc;
-use crate::chain::config;
+use crate::blockchain::config;
 use rocksdb::{DBWithThreadMode, MultiThreaded, Options};
 
 pub fn open(config: &config::Config) -> Result<Arc<DBWithThreadMode<MultiThreaded>>, std::io::Error> {

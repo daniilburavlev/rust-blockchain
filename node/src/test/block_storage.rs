@@ -2,10 +2,10 @@ use std::fs;
 use std::sync::Arc;
 use tempfile::tempdir;
 use wallet::wallet::Wallet;
-use crate::chain::block::Block;
-use crate::chain::storage::block_storage::BlockStorage;
-use crate::chain::storage::db;
-use crate::chain::tx::Tx;
+use crate::blockchain::block::Block;
+use crate::blockchain::storage::block_storage::BlockStorage;
+use crate::blockchain::storage::db;
+use chain::tx::Tx;
 use crate::test::commons::config;
 
 #[test]

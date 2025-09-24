@@ -1,0 +1,15 @@
+[package]
+name = "chain"
+version.workspace = true
+repository.workspace = true
+edition.workspace = true
+
+[dependencies]
+libsecp256k1 = { workspace = true }
+wallet = { path = "../wallet" }
+bigdecimal = { workspace = true }
+serde = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+
+[dev-dependencies]

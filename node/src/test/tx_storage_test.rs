@@ -1,8 +1,8 @@
 use std::fs;
 use std::sync::Arc;
-use crate::chain::storage::db;
-use crate::chain::storage::tx_storage::TxStorage;
-use crate::chain::tx::Tx;
+use crate::blockchain::storage::db;
+use crate::blockchain::storage::tx_storage::TxStorage;
+use chain::tx::Tx;
 use crate::test::commons::{config, wallet, wallet_with_balance};
 
 #[test]

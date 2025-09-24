@@ -1,4 +1,4 @@
-use crate::chain::block::Block;
+use crate::blockchain::block::Block;
 use rocksdb::{DBWithThreadMode, MultiThreaded};
 use std::str::FromStr;
 use std::sync::Arc;

@@ -1,19 +1,19 @@
-use crate::chain::block::Block;
-use crate::chain::config::Config;
-use crate::chain::stake::Stake;
-use crate::chain::storage::block_storage::BlockStorage;
-use crate::chain::storage::db;
-use crate::chain::storage::nonce_storage::NonceStorage;
-use crate::chain::storage::tx_storage::TxStorage;
-use crate::chain::system::{STAKE_WALLET, UNSTAKE_WALLET};
-use crate::chain::tx::Tx;
+use crate::blockchain::block::Block;
+use crate::blockchain::config::Config;
+use crate::blockchain::stake::Stake;
+use crate::blockchain::storage::block_storage::BlockStorage;
+use crate::blockchain::storage::db;
+use crate::blockchain::storage::nonce_storage::NonceStorage;
+use crate::blockchain::storage::tx_storage::TxStorage;
+use crate::blockchain::system::{STAKE_WALLET, UNSTAKE_WALLET};
 use bigdecimal::num_bigint::{BigInt, ToBigInt};
 use bigdecimal::{BigDecimal, FromPrimitive, Zero};
+use chain::tx::Tx;
+use sha2::Digest;
 use std::collections::HashMap;
 use std::fs;
 use std::hash::{DefaultHasher, Hash, Hasher};
 use std::sync::Arc;
-use sha2::Digest;
 use wallet::wallet::Wallet;
 
 pub struct Blockchain {

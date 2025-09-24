@@ -1,7 +1,7 @@
-use crate::chain::config::Config;
-use crate::chain::tx;
+use crate::blockchain::config::Config;
 use crate::net::client::Client;
-use crate::{chain, net};
+use crate::{blockchain, net};
+use chain::tx;
 use clap::{Parser, Subcommand};
 use wallet::wallet::Wallet;
 
@@ -38,7 +38,7 @@ pub enum ChainCmd {
     },
 }
 
-async fn create_wallet(config: &chain::config::Config) -> Result<(), std::io::Error> {
+async fn create_wallet(config: &blockchain::config::Config) -> Result<(), std::io::Error> {
     println!("Enter password:");
     let password = rpassword::read_password()?;
     let wallet = Wallet::new();
@@ -48,7 +48,7 @@ async fn create_wallet(config: &chain::config::Config) -> Result<(), std::io::Er
 }
 
 async fn stake(
-    config: &chain::config::Config,
+    config: &blockchain::config::Config,
     from: String,
     amount: String,
 ) -> Result<(), Box<dyn std::error::Error>> {
@@ -56,7 +56,7 @@ async fn stake(
 }
 
 async fn new_tx(
-    config: &chain::config::Config,
+    config: &blockchain::config::Config,
     from: String,
     to: String,
     amount: String,
@@ -90,7 +90,7 @@ pub async fn start_cli() -> Result<(), Box<dyn std::error::Error>> {
     let config = if let Some(config_path) = cli.config {
         Config::from_file(config_path.as_str())?
     } else {
-        Config::from_file(chain::config::DEFAULT_CONFIG_PATH)?
+        Config::from_file(blockchain::config::DEFAULT_CONFIG_PATH)?
     };
     match cli.chain {
         ChainCmd::Create => create_wallet(&config).await?,

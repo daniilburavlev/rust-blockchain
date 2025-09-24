@@ -1,4 +1,4 @@
-use crate::chain::tx::Tx;
+use chain::tx::Tx;
 use rocksdb::{DBWithThreadMode, MultiThreaded};
 use std::collections::{BTreeSet, HashSet};
 use std::sync::Arc;
