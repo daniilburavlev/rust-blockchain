@@ -16,5 +16,10 @@ This article explores the implementation of a core blockchain in Rust, leveragin
 
 ---
 ### [Project initialization](docs/project_initialization.md)
+Configuring local dev, cargo workspaces initialization
 
 ### [Wallets](docs/wallet.md)
+Main information about blockchain wallets, private/public keys, signing, persisting wallet locally
+
+### [Transactions](docs/transactions.md)
+Creating new transactions, signing transactions, double spending problem.

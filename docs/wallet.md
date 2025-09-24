@@ -293,6 +293,22 @@ impl Wallet {
 }
 ```
 
+### Signing data
+```rust
+impl Wallet {
+  ...
+  // We expect sha-256 hash value 
+  pub fn sign(&self, data: &[u8; 32]) -> Result<String, std::io::Error> {
+    // parsing wallets secret
+    let secret = libsecp256k1::SecretKey::parse(&self.secret).unwrap();
+    // signing
+    let (signature, _) = libsecp256k1::sign(&libsecp256k1::Message::parse(data), &secret);
+    Ok(hex::encode(signature.serialize()))
+  }
+  ...
+}
+```
+
 ## Testing and usage
 
 ---
